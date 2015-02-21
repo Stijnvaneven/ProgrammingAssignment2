@@ -29,8 +29,8 @@ makeCacheMatrix <- function(x = matrix()) {
     m <<- NULL
   }
   get <- function() x
-  setinv <- function(solve) m <<- solve
   getinv <- function() m
+  setinv <- function(solve) m <<- solve
   list(set = set, get = get, setinv = setinv, getinv = getinv)
   
 }
@@ -48,6 +48,8 @@ cacheSolve <- function(x, ...) {
     return(m)
   }
   data <- x$get()
+  ## Solve takes as second argument a numeric or complex vector or matrix giving the right-hand side(s) of the linear system. 
+  ## If missing, b is taken to be an identity matrix and solve will return the inverse of "data"
   m<- solve(data, ...)
   x$setinv(m)
   m
